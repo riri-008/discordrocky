@@ -15,9 +15,6 @@ jobs:
     - name: Clean npm cache
       run: npm cache clean --force
 
-    - name: Install dependencies
-      run: npm install --force  # Use --force to ensure fresh installation
-
     - name: Set up Node.js
       uses: actions/setup-node@v3  # Updated to v3
       with:
