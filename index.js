@@ -18,8 +18,8 @@ client.on('guildMemberAdd', async member => {
 
     if (channel) {
         channel.send(`Welcome to the server, ${member}! 
-- Make sure to read {#1277630697024131094}.
-- Head over to {#1277630697183510673} to verify.`);
+- Make sure to read <#1277630697024131094>.
+- Head over to <#1277630697183510673> to verify.`);
     } else {
         console.error('Welcome channel not found');
     }
