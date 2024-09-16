@@ -596,7 +596,8 @@ client.once('ready', async () => {
         const existingMessage = messages.find(msg => msg.content.includes('RULES'));
 
         if (!existingMessage) {
-            const embed = {
+            const 
+            embed = {
                 title: "RULES",
                 description: `Welcome to UpsWing! Online English Academy! 
                 To ensure a positive and productive environment, please adhere to the following rules:
@@ -614,7 +615,9 @@ client.once('ready', async () => {
                 }
             };
 
-            rulesChannel.send({ embeds: [embed] });
+            rulesChannel.send({ 
+                content: `RULES`,
+                embeds: [embed] });
         }
     } else {
         console.error('Rules channel not found');
