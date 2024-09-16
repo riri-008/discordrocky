@@ -17,7 +17,7 @@ client.on('guildMemberAdd', async member => {
     const channel = member.guild.channels.cache.get(welcomeChannelId);
 
     if (channel) {
-        channel.send(`Welcome to UpsWing, ${member}! :upswing:
+        channel.send(`Welcome to UpsWing, ${member}! <:upswing:1284202896119959694> I'm **Rocky**, your personal guide!
 - Make sure to read <#1277630697024131094>.
 - Head over to <#1277630697183510673> to verify.`);
     } else {
@@ -584,6 +584,40 @@ client.on('interactionCreate', async interaction => {
         }
 
         await interaction.reply({ content: 'Your courseware request has been submitted!', ephemeral: true });
+    }
+});
+
+client.once('ready', async () => {
+    const rulesChannelId = process.env.RULES_CHANNEL_ID;
+    const rulesChannel = client.channels.cache.get(rulesChannelId);
+
+    if (rulesChannel) {
+        const messages = await rulesChannel.messages.fetch({ limit: 100 });
+        const existingMessage = messages.find(msg => msg.content.includes('RULES'));
+
+        if (!existingMessage) {
+            const embed = {
+                title: "RULES",
+                description: `Welcome to UpsWing! Online English Academy! 
+                To ensure a positive and productive environment, please adhere to the following rules:
+                **Respect Everyone**: Treat all members with kindness and respect. Harassment, discrimination, and bullying will not be tolerated.
+                **No Spamming**: Avoid sending repetitive messages, advertisements, or irrelevant links. Keep the discussions meaningful and on-topic.
+                **Use Appropriate Channels**: Post your messages in the correct channels. Read the channel descriptions to understand their purpose.
+                **No NSFW Content**: Do not share any explicit, offensive, or inappropriate content. This includes images, videos, and links.
+                **Stay On-Topic**: Keep conversations relevant to the channel’s topic. Off-topic discussions should be moved to the appropriate channels.
+                **Protect Privacy**: Do not share personal information (yours or others') without consent. Respect everyone’s privacy.
+                **Follow Discord’s Terms of Service**: Adhere to all of Discord’s community guidelines and terms of service.
+                **Be Helpful**: Support and encourage other members. Share your knowledge and resources generously.
+                **Report Issues**: If you encounter any problems or witness rule violations, report them to the moderators.`,
+                image: {
+                    url: 'https://upswingonlineacademy.com/rules.png'
+                }
+            };
+
+            rulesChannel.send({ embeds: [embed] });
+        }
+    } else {
+        console.error('Rules channel not found');
     }
 });
 
